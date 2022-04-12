@@ -17,7 +17,8 @@
   "rules": {
     "prettier/prettier": "error",
     "mocha/no-exclusive-tests": "error",
-    "@typescript-eslint/no-explicit-any": 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "mocha/no-mocha-arrows": false
   },
   "parserOptions": {
     "ecmaVersion": 2020,

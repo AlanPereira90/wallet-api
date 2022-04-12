@@ -3,7 +3,7 @@ import { Column, Entity } from 'typeorm';
 import EntityBase from '../../common/Entities/EntityBase';
 
 @Entity()
-export default class Wallet extends EntityBase {
+export default class WalletEntity extends EntityBase {
   @Column()
   name!: string;
 

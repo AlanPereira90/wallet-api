@@ -1,11 +1,11 @@
 import { DeepPartial, DeleteResult, FindManyOptions, FindOneOptions, FindOptionsWhere, UpdateResult } from 'typeorm';
 
-import Moviment from '../../entities/Moviment';
+import MovimentEntity from '../../entities/MovimentEntity';
 
 export interface IMovimentDao {
-  create(wallet: DeepPartial<Moviment>): Moviment;
-  update(criteria: FindOptionsWhere<Moviment>, fields: Partial<Moviment>): Promise<UpdateResult>;
-  findOne(options: FindOneOptions<Moviment>): Promise<Moviment | null>;
-  find(options: FindManyOptions<Moviment>): Promise<Moviment[]>;
-  delete(criteria: FindOptionsWhere<Moviment>): Promise<DeleteResult>;
+  create(wallet: DeepPartial<MovimentEntity>): MovimentEntity;
+  update(criteria: FindOptionsWhere<MovimentEntity>, fields: Partial<MovimentEntity>): Promise<UpdateResult>;
+  findOne(options: FindOneOptions<MovimentEntity>): Promise<MovimentEntity | null>;
+  find(options: FindManyOptions<MovimentEntity>): Promise<MovimentEntity[]>;
+  delete(criteria: FindOptionsWhere<MovimentEntity>): Promise<DeleteResult>;
 }

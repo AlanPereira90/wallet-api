@@ -1,7 +1,7 @@
 import { container, Lifecycle, registry, scoped } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
-import Descriptor from '../entities/Descriptor';
+import Descriptor from '../entities/DescriptorEntity';
 
 @scoped(Lifecycle.ResolutionScoped)
 @registry([

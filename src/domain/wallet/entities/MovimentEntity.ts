@@ -3,7 +3,7 @@ import { Column, Entity } from 'typeorm';
 import EntityBase from '../../common/Entities/EntityBase';
 
 @Entity()
-export default class Moviment extends EntityBase {
+export default class MovimentEntity extends EntityBase {
   @Column()
   date!: Date;
 

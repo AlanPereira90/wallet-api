@@ -1,5 +1,5 @@
-import Wallet from '../../entities/Wallet';
+import { WalletData, WalletWithId } from '../../entities/interfaces/IWallet';
 
 export interface IWalletRepository {
-  create(wallet: Wallet): Wallet;
+  create(wallet: WalletData): Promise<WalletWithId>;
 }

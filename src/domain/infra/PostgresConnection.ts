@@ -1,7 +1,7 @@
 import { container } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
-import { POSTGRES } from '../utils/environment';
+import { ENV, POSTGRES } from '../utils/environment';
 
 export const connection = new DataSource({
   type: 'postgres',
@@ -11,6 +11,15 @@ export const connection = new DataSource({
   password: POSTGRES.PASSWORD,
   database: POSTGRES.DATABASE,
   migrations: ['../../migrations/*.ts'],
+  entities: ['../entities/*.ts'],
 });
 
-container.registerInstance('PostgresConnection', async () => await connection.initialize());
+export async function connectDB() {
+  const db = await connection.initialize();
+
+  console.info('PostgreSQL connection stablished');
+
+  if (ENV !== 'test') {
+    container.registerInstance('PostgresConnection', db);
+  }
+}

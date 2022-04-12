@@ -3,8 +3,8 @@ import supertest from 'supertest';
 import { OK } from 'http-status';
 import { expect } from 'chai';
 
-import { App } from '../../src/application/setup/App';
-import { doc } from '../documentation';
+import { App } from '../../../src/application/setup/App';
+import { doc } from '../../documentation';
 
 let app: Express;
 before(function () {

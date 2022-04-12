@@ -1,9 +1,13 @@
 import 'reflect-metadata';
 
-//import './domain/config/di';
+import './domain/config/di';
 import './application/config/di';
 
-import { App } from './application/setup/App';
+import { connectDB } from './domain/infra/PostgresConnection';
 
-const app = new App();
-app.listen();
+connectDB().then(() => {
+  const { App } = require('./application/setup/App');
+
+  const app = new App();
+  app.listen();
+});

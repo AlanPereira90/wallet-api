@@ -3,7 +3,7 @@ import { Column, Entity } from 'typeorm';
 import EntityBase from '../../common/Entities/EntityBase';
 
 @Entity()
-export default class Descriptor extends EntityBase {
+export default class DescriptorEntity extends EntityBase {
   @Column()
   description!: string;
 

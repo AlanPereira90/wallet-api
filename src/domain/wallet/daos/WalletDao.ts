@@ -1,7 +1,7 @@
 import { container, Lifecycle, registry, scoped } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
-import Wallet from '../entities/Wallet';
+import WalletEntity from '../entities/WalletEntity';
 
 @scoped(Lifecycle.ResolutionScoped)
 @registry([
@@ -9,7 +9,7 @@ import Wallet from '../entities/Wallet';
     token: 'WalletDao',
     useFactory: async () => {
       const connection = await container.resolve<DataSource>('PostgresConnection');
-      return connection.getRepository(Wallet);
+      return connection.getRepository<WalletEntity>(WalletEntity);
     },
   },
 ])

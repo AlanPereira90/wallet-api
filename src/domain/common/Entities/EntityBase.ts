@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export default class EntityBase {
   @PrimaryGeneratedColumn()
-  id!: string;
+  id!: number;
 
   @Column({ name: 'created_at' })
   createdAt!: Date;
