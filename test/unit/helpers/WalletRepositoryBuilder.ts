@@ -9,9 +9,9 @@ export default class WalletRepositoryBuilder {
     const save = stub();
     const update = stub();
     const findOne = stub();
-    const find = stub();
+    const findBy = stub();
     const del = stub();
 
-    return new WalletRepository({ save, update, findOne, find, delete: del, ...dao });
+    return new WalletRepository({ save, update, findOne, findBy, delete: del, ...dao });
   }
 }

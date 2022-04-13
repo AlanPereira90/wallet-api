@@ -7,7 +7,8 @@ import { IWalletService } from '../../../src/domain/wallet/services/interfaces/I
 export default class WalletServiceBuilder {
   public static build(repository: Partial<IWalletRepository> = {}): IWalletService {
     const create = stub();
+    const retrieveBy = stub();
 
-    return new WalletService({ create, ...repository });
+    return new WalletService({ create, retrieveBy, ...repository });
   }
 }

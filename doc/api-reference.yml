@@ -96,11 +96,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 3.361ms
+              example: 0.500ms
             date:
               schema:
                 type: string
-              example: Wed, 13 Apr 2022 19:33:47 GMT
+              example: Wed, 13 Apr 2022 20:41:55 GMT
             connection:
               schema:
                 type: string
@@ -119,7 +119,7 @@ paths:
                 properties:
                   id:
                     type: number
-                    example: 20810
+                    example: 4087
           headers:
             content-security-policy:
               schema:
@@ -192,19 +192,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "12"
+              example: "11"
             etag:
               schema:
                 type: string
-              example: W/"c-/o5lq3pECLkJ5c65rqk8kdgX8/E"
+              example: W/"b-XgA9wB9HJeyzuqSqlRaAYyKaCdI"
             x-response-time:
               schema:
                 type: string
-              example: 13.134ms
+              example: 1.407ms
             date:
               schema:
                 type: string
-              example: Wed, 13 Apr 2022 19:33:47 GMT
+              example: Wed, 13 Apr 2022 20:41:55 GMT
             connection:
               schema:
                 type: string
@@ -299,11 +299,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.483ms
+              example: 0.384ms
             date:
               schema:
                 type: string
-              example: Wed, 13 Apr 2022 19:33:47 GMT
+              example: Wed, 13 Apr 2022 20:41:55 GMT
             connection:
               schema:
                 type: string
@@ -317,7 +317,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Consequatur incidunt suscipit ex odit debitis voluptas quasi est.
+                    example: Repellendus aut qui accusamus facere vitae aut.
           headers:
             content-security-policy:
               schema:
@@ -390,19 +390,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "79"
+              example: "61"
             etag:
               schema:
                 type: string
-              example: W/"4f-By2c3+xGLHzoi9EKcnDJSZojISo"
+              example: W/"3d-8WVeYbwEhKnK0+5n7kcHyu3oqvY"
             x-response-time:
               schema:
                 type: string
-              example: 1.672ms
+              example: 0.876ms
             date:
               schema:
                 type: string
-              example: Wed, 13 Apr 2022 19:33:47 GMT
+              example: Wed, 13 Apr 2022 20:41:55 GMT
             connection:
               schema:
                 type: string
@@ -417,7 +417,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Kaleb
+                  example: Jerald
 servers:
   - url: http://localhost:6060
     description: Wallet API Server

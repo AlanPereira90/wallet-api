@@ -21,4 +21,15 @@ export default class WalletRepository implements IWalletRepository {
       throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
     }
   }
+
+  retrieveBy(filter?: Partial<WalletData>): Promise<WalletWithId[]> {
+    try {
+      const result = this._dao.findBy({ ...filter });
+      return result;
+    } catch (error: any) {
+      console.error(`[ERROR]: ${error.message}`);
+
+      throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
+    }
+  }
 }

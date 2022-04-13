@@ -33,4 +33,36 @@ describe('Wallet Repository', () => {
       expect(save).to.be.calledOnceWith(wallet);
     });
   });
+
+  describe('retrieveBy()', () => {
+    it('should find wallets given a filter successfully', async () => {
+      const filter = {
+        name: faker.name.firstName(),
+      };
+      const wallets = [WalletBuilder.build({ ...filter }), WalletBuilder.build({ ...filter })];
+
+      const findBy = stub().resolves(wallets);
+      const instance = WalletRepositoryBuilder.build({ findBy });
+
+      const result = await instance.retrieveBy(filter);
+
+      expect(result).to.be.deep.equal(wallets);
+      expect(findBy).to.be.calledOnceWith(filter);
+    });
+
+    it('should fail when dao fails', async () => {
+      const filter = {
+        name: faker.name.firstName(),
+      };
+      const message = faker.lorem.sentence();
+
+      const findBy = stub().rejects(new Error(message));
+      const instance = WalletRepositoryBuilder.build({ findBy });
+
+      const promise = instance.retrieveBy(filter);
+
+      expect(promise).to.be.eventually.rejected.with.property('message', message);
+      expect(findBy).to.be.calledOnceWith(filter);
+    });
+  });
 });
