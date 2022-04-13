@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm';
 
-import EntityBase from '../../common/Entities/EntityBase';
+import EntityBase from '../../common/entities/EntityBase';
 
-@Entity()
+@Entity({ name: 'moviment' })
 export default class MovimentEntity extends EntityBase {
   @Column()
   date!: Date;

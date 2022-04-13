@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm';
 
-import EntityBase from '../../common/Entities/EntityBase';
+import EntityBase from '../../common/entities/EntityBase';
 
-@Entity()
+@Entity({ name: 'descriptor' })
 export default class DescriptorEntity extends EntityBase {
   @Column()
   description!: string;

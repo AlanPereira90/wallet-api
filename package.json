@@ -10,7 +10,11 @@
     "test:tdd": "npm run test -- --watch --watch-extensions ts",
     "test:coverage": "rimraf ./coverage && nyc npm run test",
     "lint": "tsc --project tsconfig.json --noEmit && eslint ./src/**/*.ts --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:create": "cd migrations && typeorm migration:create ",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/domain/infra/PostgresConnection.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/domain/infra/PostgresConnection.ts"
   },
   "repository": {
     "type": "git",
@@ -80,6 +84,8 @@
     "sinon-chai": "^3.7.0",
     "supertest": "^6.2.2",
     "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.14.1",
     "tslib": "^2.3.1",
     "typescript": "^4.6.3"
   },

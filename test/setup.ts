@@ -3,18 +3,19 @@ import chai from 'chai';
 import sinonChai from 'sinon-chai';
 import chaiAsPromised from 'chai-as-promised';
 import { container } from 'tsyringe';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
+import { stub } from 'sinon';
 
 import './setupEnvVars';
 
+container.registerInstance('DbConnection', {
+  //@ts-ignore
+  getRepository: stub().returns(new Repository()),
+  query: () => Promise.resolve([]),
+} as unknown as DataSource);
+
 import '../src/domain/config/di';
 import '../src/application/config/di';
-import { stub } from 'sinon';
-
-container.registerInstance('PostgresConnection', {
-  //@ts-ignore
-  getRepository: { create: stub().resolves() } as Repository<any>,
-});
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
