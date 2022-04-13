@@ -7,10 +7,7 @@ import WalletEntity from '../entities/WalletEntity';
 @registry([
   {
     token: 'WalletDao',
-    useFactory: async () => {
-      const connection = await container.resolve<DataSource>('PostgresConnection');
-      return connection.getRepository<WalletEntity>(WalletEntity);
-    },
+    useFactory: () => container.resolve<DataSource>('PostgresConnection').getRepository(WalletEntity),
   },
 ])
 export default class WalletDao {}

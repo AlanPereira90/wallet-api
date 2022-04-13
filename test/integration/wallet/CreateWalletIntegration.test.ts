@@ -1,14 +1,14 @@
 import { Express } from 'express';
 import supertest from 'supertest';
 import { expect } from 'chai';
-
-import { App } from '../../../src/application/setup/App';
-import { doc } from '../../documentation';
-import { CREATED } from 'http-status';
 import faker from '@faker-js/faker';
 import { Repository } from 'typeorm';
-import { stub } from 'sinon';
-import { WalletWithId } from 'src/domain/wallet/entities/interfaces/IWallet';
+import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR } from 'http-status';
+import { restore, stub } from 'sinon';
+
+import { App } from '../../../src/application/setup/App';
+import { WalletWithId } from '../../../src/domain/wallet/entities/interfaces/IWallet';
+import { doc } from '../../documentation';
 
 let app: Express;
 before(function () {
@@ -23,8 +23,12 @@ after(async () => {
   }
 });
 
+afterEach(() => {
+  restore();
+});
+
 describe('POST /wallets', () => {
-  it.only('should return 201 created', async (done) => {
+  it('should return 201 CREATED', (done) => {
     const body = { name: faker.name.firstName() };
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
 
@@ -35,7 +39,7 @@ describe('POST /wallets', () => {
       enabled: true,
     };
 
-    const create = stub(Repository.prototype, 'create').resolves(savedWallet);
+    const save = stub(Repository.prototype, 'save').resolves(savedWallet);
 
     supertest(app)
       .post('/wallets')
@@ -46,13 +50,88 @@ describe('POST /wallets', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('accessToken').to.be.a('string');
-        expect(create).to.be.calledOnceWith({ enabled: true, ...body });
+        expect(res.body).to.have.property('id').to.be.equal(savedWallet.id);
+        expect(save).to.be.calledOnceWith({ enabled: true, name: body.name, credentialId: headers['x-credential-id'] });
 
         doc
           .path('/wallets')
           .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
           .fromSuperAgentResponse(res, 'success');
+
+        done();
+      });
+  });
+
+  it('should return 400 BAD_REQUEST given an invalid body', (done) => {
+    const body = { namem: faker.name.firstName() };
+    const headers = { ['x-credential-id']: faker.datatype.uuid() };
+
+    supertest(app)
+      .post('/wallets')
+      .set('Content-type', 'application/json')
+      .set(headers)
+      .send(body)
+      .expect(BAD_REQUEST)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').to.be.equal('"name" is required');
+
+        doc
+          .path('/wallets')
+          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .fromSuperAgentResponse(res, 'invalid body');
+
+        done();
+      });
+  });
+
+  it('should return 400 BAD_REQUEST given a request without required headers', (done) => {
+    const body = { name: faker.name.firstName() };
+    const headers = { [faker.lorem.word()]: faker.datatype.uuid() };
+
+    supertest(app)
+      .post('/wallets')
+      .set('Content-type', 'application/json')
+      .set(headers)
+      .send(body)
+      .expect(BAD_REQUEST)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').to.be.equal('Missing x-credential-id header');
+
+        doc
+          .path('/wallets')
+          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .fromSuperAgentResponse(res, 'invalid headers');
+
+        done();
+      });
+  });
+
+  it('should return 500 INTERNAL_SERVER_ERROR when database isdown', (done) => {
+    const body = { name: faker.name.firstName() };
+    const headers = { ['x-credential-id']: faker.datatype.uuid() };
+    const message = faker.lorem.sentence();
+    const save = stub(Repository.prototype, 'save').rejects(new Error(message));
+
+    supertest(app)
+      .post('/wallets')
+      .set('Content-type', 'application/json')
+      .set(headers)
+      .send(body)
+      .expect(INTERNAL_SERVER_ERROR)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').to.be.equal(message);
+        expect(save).to.be.calledOnceWith({ enabled: true, name: body.name, credentialId: headers['x-credential-id'] });
+
+        doc
+          .path('/wallets')
+          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .fromSuperAgentResponse(res, 'internal error');
 
         done();
       });

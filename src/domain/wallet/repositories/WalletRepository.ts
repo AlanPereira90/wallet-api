@@ -13,9 +13,11 @@ export default class WalletRepository implements IWalletRepository {
 
   async create(wallet: WalletData): Promise<WalletWithId> {
     try {
-      const result = await this._dao.create(wallet);
+      const result = await this._dao.save(wallet);
       return result;
     } catch (error: any) {
+      console.error(`[ERROR]: ${error.message}`);
+
       throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
     }
   }

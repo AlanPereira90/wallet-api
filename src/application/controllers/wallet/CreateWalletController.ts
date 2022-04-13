@@ -51,8 +51,8 @@ export default class CreateWalletController implements IController {
 
     const { error } = schema.validate(req.body);
 
-    if (error || !req.headers['x-credential-id']) {
-      res.status(BAD_REQUEST).json({ message: error?.message || 'Invalid request' });
+    if (error) {
+      res.status(BAD_REQUEST).json({ message: error?.message });
     } else {
       next();
     }

@@ -8,10 +8,9 @@ import { stub } from 'sinon';
 
 import './setupEnvVars';
 
-container.registerInstance('DbConnection', {
+container.registerInstance('PostgresConnection', {
   //@ts-ignore
   getRepository: stub().returns(new Repository()),
-  query: () => Promise.resolve([]),
 } as unknown as DataSource);
 
 import '../src/domain/config/di';

@@ -11,26 +11,26 @@ describe('Wallet Repository', () => {
       const wallet = WalletBuilder.build();
       const id = faker.datatype.number();
 
-      const create = stub().resolves({ id, ...wallet });
-      const instance = WalletRepositoryBuilder.build({ create });
+      const save = stub().resolves({ id, ...wallet });
+      const instance = WalletRepositoryBuilder.build({ save });
 
       const result = await instance.create(wallet);
 
       expect(result).to.be.deep.equal({ id, ...wallet });
-      expect(create).to.be.calledOnceWith(wallet);
+      expect(save).to.be.calledOnceWith(wallet);
     });
 
     it('should fail when dao fails', async () => {
       const wallet = WalletBuilder.build();
       const message = faker.lorem.sentence();
 
-      const create = stub().rejects(new Error(message));
-      const instance = WalletRepositoryBuilder.build({ create });
+      const save = stub().rejects(new Error(message));
+      const instance = WalletRepositoryBuilder.build({ save });
 
       const promise = instance.create(wallet);
 
       await expect(promise).to.be.eventually.rejected.with.property('message', message);
-      expect(create).to.be.calledOnceWith(wallet);
+      expect(save).to.be.calledOnceWith(wallet);
     });
   });
 });

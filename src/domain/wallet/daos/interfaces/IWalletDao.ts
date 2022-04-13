@@ -3,9 +3,9 @@ import { DeepPartial, DeleteResult, FindManyOptions, FindOneOptions, FindOptions
 import WalletEntity from '../../entities/WalletEntity';
 
 export interface IWalletDao {
-  create(wallet: DeepPartial<WalletEntity>): WalletEntity;
+  save(wallet: DeepPartial<WalletEntity>): Promise<WalletEntity>;
   update(criteria: FindOptionsWhere<WalletEntity>, fields: Partial<WalletEntity>): Promise<UpdateResult>;
   findOne(options: FindOneOptions<WalletEntity>): Promise<WalletEntity | null>;
-  find(options: FindManyOptions<WalletEntity>): Promise<WalletEntity[]>;
+  find(options?: FindManyOptions<WalletEntity>): Promise<WalletEntity[]>;
   delete(criteria: FindOptionsWhere<WalletEntity>): Promise<DeleteResult>;
 }

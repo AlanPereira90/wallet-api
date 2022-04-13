@@ -2,7 +2,6 @@ import { container } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
 import { ENV, POSTGRES } from '../utils/environment';
-import WalletEntity from '../wallet/entities/WalletEntity';
 
 export const connection = new DataSource({
   type: 'postgres',
@@ -13,18 +12,13 @@ export const connection = new DataSource({
   database: POSTGRES.DATABASE,
   migrations: ['migrations/**/*.ts'],
   entities: ['src/domain/wallet/entities/**/*.ts'],
+  logging: ENV === 'development',
 });
 
 export async function connectDB() {
   const db = await connection.initialize();
 
-  try {
-    await db.getRepository(WalletEntity).find();
-  } catch (error: any) {
-    console.log('------>', error.message);
-  }
-
-  console.info('PostgreSQL connection stablished');
+  console.info('[INFO]: PostgreSQL connection stablished');
 
   if (ENV !== 'test') {
     container.registerInstance('PostgresConnection', db);

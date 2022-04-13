@@ -10,6 +10,7 @@ import YAML from 'yamljs';
 import errorHandler from '../middlewares/errorHandler';
 import routes from '../routes';
 import { CONFIG, PROD } from '../../domain/utils/environment';
+import requireCredentialId from '../middlewares/requiredCredentialId';
 
 export class App {
   app: express.Express;
@@ -28,6 +29,7 @@ export class App {
     this.app.use(responseTime());
     this.app.use(cors({ origin: true }));
     this.app.use(bodyParser.json());
+    this.app.use(requireCredentialId);
     this.app.use(routes);
     this.app.use(errorHandler);
   }
@@ -35,7 +37,7 @@ export class App {
   listen(): void {
     this.app.listen(CONFIG.PORT, () => {
       console.info(
-        `Server is running. Listening on port ${CONFIG.PORT}\nDocumentation available on SERVER_URL:${CONFIG.PORT}/api-docs`,
+        `[INFO]: Server is running. Listening on port ${CONFIG.PORT}\nDocumentation available on SERVER_URL:${CONFIG.PORT}/api-docs`,
       );
       console.debug('Press CTRL+C to exit');
     });
