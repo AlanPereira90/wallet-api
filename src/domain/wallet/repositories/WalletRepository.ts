@@ -22,7 +22,7 @@ export default class WalletRepository implements IWalletRepository {
     }
   }
 
-  async retrieveBy(filter?: Partial<WalletData>): Promise<WalletWithId[]> {
+  async retrieveBy(filter?: Partial<WalletWithId>): Promise<WalletWithId[]> {
     try {
       const result = await this._dao.findBy({ ...filter });
       return result;
@@ -33,7 +33,7 @@ export default class WalletRepository implements IWalletRepository {
     }
   }
 
-  async updateBy(filter: Partial<WalletData>, data: Partial<WalletData>): Promise<WalletWithId> {
+  async updateBy(filter: Partial<WalletWithId>, data: Partial<WalletData>): Promise<WalletWithId> {
     const result = await this._dao.update(filter, data);
     return result.raw;
   }

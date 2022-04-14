@@ -1,6 +1,6 @@
 import { NOT_FOUND } from 'http-status';
 import { inject, Lifecycle, registry, scoped } from 'tsyringe';
-import { WalletWithId } from '../entities/interfaces/IWallet';
+import { WalletData, WalletWithId } from '../entities/interfaces/IWallet';
 
 import { IWalletRepository } from '../repositories/interfaces/IWalletRepository';
 import { IWalletService } from './interfaces/IWalletService';
@@ -45,5 +45,15 @@ export default class WalletService implements IWalletService {
       enabled: wallet[0].enabled,
       name: wallet[0].name,
     };
+  }
+
+  async update(id: number, credentialId: string, fields: Partial<WalletData>): Promise<WalletWithId> {
+    const wallet = await this._repository.retrieveBy({ id, credentialId });
+
+    if (!wallet.length) {
+      throw new ResponseError(NOT_FOUND, WALLET_ERRORS.WALLET_NOT_FOUND.MESSAGE, WALLET_ERRORS.WALLET_NOT_FOUND.CODE);
+    }
+
+    return this._repository.updateBy({ id }, fields);
   }
 }

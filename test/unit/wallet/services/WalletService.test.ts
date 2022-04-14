@@ -85,4 +85,40 @@ describe('Wallet Service', () => {
       expect(retrieveBy).to.be.calledOnceWith({ name, credentialId });
     });
   });
+
+  describe('update()', () => {
+    it('should update a wallet successfully', async () => {
+      const wallet = WalletBuilder.build();
+      const id = faker.datatype.number();
+      const fieldsToUpdate = { name: faker.lorem.word() };
+
+      const retrieveBy = stub().resolves([wallet]);
+      const updateBy = stub().resolves({ id, ...wallet, ...fieldsToUpdate });
+
+      const instance = WalletServiceBuilder.build({ retrieveBy, updateBy });
+
+      const result = await instance.update(id, wallet.credentialId, fieldsToUpdate);
+
+      expect(result).to.be.deep.equal({ id, ...wallet, ...fieldsToUpdate });
+      expect(retrieveBy).to.be.calledOnceWith({ id, credentialId: wallet.credentialId });
+      expect(updateBy).to.be.calledOnceWith({ id }, fieldsToUpdate);
+    });
+
+    it('should fail when wallet is not found', async () => {
+      const wallet = WalletBuilder.build();
+      const id = faker.datatype.number();
+      const fieldsToUpdate = { name: faker.lorem.word() };
+
+      const retrieveBy = stub().resolves([]);
+      const updateBy = stub().resolves({ id, ...wallet, ...fieldsToUpdate });
+
+      const instance = WalletServiceBuilder.build({ retrieveBy, updateBy });
+
+      const promise = instance.update(id, wallet.credentialId, fieldsToUpdate);
+
+      await expect(promise).to.be.eventually.rejected.with.property('message', WALLET_ERRORS.WALLET_NOT_FOUND.MESSAGE);
+      await expect(promise).to.be.eventually.rejected.with.property('code', WALLET_ERRORS.WALLET_NOT_FOUND.CODE);
+      expect(retrieveBy).to.be.calledOnceWith({ id, credentialId: wallet.credentialId });
+    });
+  });
 });
