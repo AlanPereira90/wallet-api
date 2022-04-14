@@ -79,4 +79,43 @@ describe('Wallet Repository', () => {
       expect(findBy).to.be.calledOnceWith(filter);
     });
   });
+
+  describe('updateBy()', () => {
+    it('should update a wallet successfully', async () => {
+      const filter = {
+        name: faker.lorem.word(),
+      };
+      const newValues = {
+        enabled: false,
+      };
+      const wallet = WalletBuilder.build({ ...filter });
+      const updatedWallet = WalletBuilder.build({ ...wallet, ...newValues });
+
+      const update = stub().resolves({ raw: updatedWallet });
+      const instance = WalletRepositoryBuilder.build({ update });
+
+      const result = await instance.updateBy(filter, newValues);
+
+      expect(result).to.be.deep.equal(updatedWallet);
+      expect(update).to.be.calledOnceWith(filter, newValues);
+    });
+
+    it('should fail when dao fails', async () => {
+      const filter = {
+        name: faker.lorem.word(),
+      };
+      const newValues = {
+        enabled: false,
+      };
+      const message = faker.lorem.sentence();
+
+      const update = stub().rejects(new Error(message));
+      const instance = WalletRepositoryBuilder.build({ update });
+
+      const promise = instance.updateBy(filter, newValues);
+
+      expect(promise).to.be.eventually.rejected.with.property('message', message);
+      expect(update).to.be.calledOnceWith(filter, newValues);
+    });
+  });
 });

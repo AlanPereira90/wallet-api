@@ -8,7 +8,8 @@ export default class WalletServiceBuilder {
   public static build(repository: Partial<IWalletRepository> = {}): IWalletService {
     const create = stub();
     const retrieveBy = stub();
+    const updateBy = stub();
 
-    return new WalletService({ create, retrieveBy, ...repository });
+    return new WalletService({ create, retrieveBy, updateBy, ...repository });
   }
 }

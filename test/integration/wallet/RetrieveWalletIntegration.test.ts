@@ -33,7 +33,10 @@ describe('GET /wallets', () => {
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
     const name = faker.lorem.word();
 
-    const wallet = WalletBuilder.build({ name, credentialId: headers['x-credential-id'] });
+    const wallet = {
+      id: faker.datatype.uuid(),
+      ...WalletBuilder.build({ name, credentialId: headers['x-credential-id'] }),
+    };
 
     const findBy = stub(Repository.prototype, 'findBy').resolves([wallet]);
 
@@ -45,9 +48,7 @@ describe('GET /wallets', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res.body).to.be.an('object');
-        expect(res.body)
-          .to.have.property('wallets')
-          .to.be.deep.equal([{ enabled: wallet.enabled, name: wallet.name }]);
+        expect(res.body).to.have.property('wallets').to.be.deep.equal([wallet]);
         expect(findBy).to.be.calledOnceWith({ name, credentialId: headers['x-credential-id'] });
 
         doc
@@ -68,7 +69,10 @@ describe('GET /wallets', () => {
 
   it('should return 200 OK given just a credential', (done) => {
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
-    const wallet = WalletBuilder.build({ credentialId: headers['x-credential-id'] });
+    const wallet = {
+      id: faker.datatype.uuid(),
+      ...WalletBuilder.build({ credentialId: headers['x-credential-id'] }),
+    };
 
     const findBy = stub(Repository.prototype, 'findBy').resolves([wallet]);
 
@@ -79,9 +83,7 @@ describe('GET /wallets', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res.body).to.be.an('object');
-        expect(res.body)
-          .to.have.property('wallets')
-          .to.be.deep.equal([{ enabled: wallet.enabled, name: wallet.name }]);
+        expect(res.body).to.have.property('wallets').to.be.deep.equal([wallet]);
         expect(findBy).to.be.calledOnceWith({ credentialId: headers['x-credential-id'] });
 
         doc

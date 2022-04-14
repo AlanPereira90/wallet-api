@@ -1,7 +1,7 @@
 import { inject, Lifecycle, registry, scoped } from 'tsyringe';
 import { BAD_REQUEST, OK } from 'http-status';
 
-import { WalletPublicInfo } from '../../../domain/wallet/entities/interfaces/IWallet';
+import { WalletWithId } from '../../../domain/wallet/entities/interfaces/IWallet';
 import { IWalletService } from '../../../domain/wallet/services/interfaces/IWalletService';
 import { HttpVerb } from '../../../@types/http-verb';
 import {
@@ -18,7 +18,7 @@ interface RetrieveWalletRequest {
 }
 
 interface RetrieveWalletResponse {
-  wallets: WalletPublicInfo[];
+  wallets: WalletWithId[];
 }
 
 @scoped(Lifecycle.ResolutionScoped)
@@ -36,7 +36,7 @@ export default class RetrieveWalletController implements IController {
     const { name } = req.query;
     const credentialId = req.headers['x-credential-id'] as string;
 
-    let wallets: WalletPublicInfo[] = [];
+    let wallets = [];
 
     if (name) {
       wallets = [await this._service.findByNameAndCredential(name, credentialId)];

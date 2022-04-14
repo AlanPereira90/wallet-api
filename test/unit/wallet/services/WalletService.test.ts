@@ -26,7 +26,7 @@ describe('Wallet Service', () => {
   describe('findByCredential()', () => {
     it('should find a wallet successfully given a credentialId', async () => {
       const credentialId = faker.datatype.uuid();
-      const wallet = WalletBuilder.build({ credentialId });
+      const wallet = { id: faker.datatype.uuid(), ...WalletBuilder.build({ credentialId }) };
 
       const retrieveBy = stub().resolves([wallet]);
 
@@ -34,7 +34,7 @@ describe('Wallet Service', () => {
 
       const result = await instance.findByCredential(credentialId);
 
-      expect(result).to.be.deep.equal([{ enabled: wallet.enabled, name: wallet.name }]);
+      expect(result).to.be.deep.equal([wallet]);
       expect(retrieveBy).to.be.calledOnceWith({ credentialId });
     });
 
@@ -58,16 +58,15 @@ describe('Wallet Service', () => {
       const credentialId = faker.datatype.uuid();
       const name = faker.lorem.word();
 
-      const wallet = WalletBuilder.build({ credentialId });
+      const wallet = { id: faker.datatype.uuid(), ...WalletBuilder.build({ credentialId }) };
 
       const retrieveBy = stub().resolves([wallet]);
-      const expectedResult = { enabled: wallet.enabled, name: wallet.name };
 
       const instance = WalletServiceBuilder.build({ retrieveBy });
 
       const result = await instance.findByNameAndCredential(name, credentialId);
 
-      expect(result).to.be.deep.equal(expectedResult);
+      expect(result).to.be.deep.equal(wallet);
       expect(retrieveBy).to.be.calledOnceWith({ name, credentialId });
     });
 
