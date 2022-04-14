@@ -9,7 +9,7 @@ import YAML from 'yamljs';
 
 import errorHandler from '../middlewares/errorHandler';
 import routes from '../routes';
-import { CONFIG, PROD } from '../../domain/utils/environment';
+import { CONFIG, PROD } from '../../domain/common/utils/environment';
 import requireCredentialId from '../middlewares/requiredCredentialId';
 
 export class App {

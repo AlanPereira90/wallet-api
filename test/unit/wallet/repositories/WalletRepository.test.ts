@@ -50,6 +50,20 @@ describe('Wallet Repository', () => {
       expect(findBy).to.be.calledOnceWith(filter);
     });
 
+    it('should return an empty array when search does reach out nothing', async () => {
+      const filter = {
+        name: faker.name.firstName(),
+      };
+
+      const findBy = stub().resolves([]);
+      const instance = WalletRepositoryBuilder.build({ findBy });
+
+      const result = await instance.retrieveBy(filter);
+
+      expect(result).to.be.deep.equal([]);
+      expect(findBy).to.be.calledOnceWith(filter);
+    });
+
     it('should fail when dao fails', async () => {
       const filter = {
         name: faker.name.firstName(),

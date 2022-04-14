@@ -1,7 +1,7 @@
 import { INTERNAL_SERVER_ERROR } from 'http-status';
 import { inject, Lifecycle, registry, scoped } from 'tsyringe';
 
-import ResponseError from '../../utils/ResponseError';
+import ResponseError from '../../common/utils/ResponseError';
 import { IWalletDao } from '../daos/interfaces/IWalletDao';
 import { WalletData, WalletWithId } from '../entities/interfaces/IWallet';
 import { IWalletRepository } from './interfaces/IWalletRepository';

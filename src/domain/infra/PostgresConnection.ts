@@ -1,7 +1,7 @@
 import { container } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
-import { ENV, POSTGRES } from '../utils/environment';
+import { ENV, POSTGRES } from '../common/utils/environment';
 
 export const connection = new DataSource({
   type: 'postgres',
