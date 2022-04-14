@@ -2,8 +2,8 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import { stub } from 'sinon';
 
-import WalletBuilder from '../../helpers/WalletBuilder';
-import WalletServiceBuilder from '../../helpers/WalletServiceBuilder';
+import WalletBuilder from '../../../helpers/WalletBuilder';
+import WalletServiceBuilder from '../../../helpers/WalletServiceBuilder';
 import { WALLET_ERRORS } from '../../../../src/domain/common/utils/error';
 
 describe('Wallet Service', () => {
@@ -34,7 +34,7 @@ describe('Wallet Service', () => {
 
       const result = await instance.findByCredential(credentialId);
 
-      expect(result).to.be.deep.equal([wallet]);
+      expect(result).to.be.deep.equal([{ enabled: wallet.enabled, name: wallet.name }]);
       expect(retrieveBy).to.be.calledOnceWith({ credentialId });
     });
 
@@ -61,12 +61,13 @@ describe('Wallet Service', () => {
       const wallet = WalletBuilder.build({ credentialId });
 
       const retrieveBy = stub().resolves([wallet]);
+      const expectedResult = { enabled: wallet.enabled, name: wallet.name };
 
       const instance = WalletServiceBuilder.build({ retrieveBy });
 
       const result = await instance.findByNameAndCredential(name, credentialId);
 
-      expect(result).to.be.deep.equal(wallet);
+      expect(result).to.be.deep.equal(expectedResult);
       expect(retrieveBy).to.be.calledOnceWith({ name, credentialId });
     });
 

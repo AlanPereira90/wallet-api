@@ -9,5 +9,5 @@ export const doc = new OpenAPIDocument(
     title: 'Wallet API',
     description: 'Wallet API definitions',
   },
-  [{ url: 'http://localhost:6060', description: 'Wallet API Server' }],
+  [{ url: 'http://localhost:7000', description: 'Wallet API Server' }],
 );

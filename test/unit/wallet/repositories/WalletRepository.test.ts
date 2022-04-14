@@ -2,8 +2,8 @@ import faker from '@faker-js/faker';
 import { expect } from 'chai';
 import { stub } from 'sinon';
 
-import WalletRepositoryBuilder from '../../helpers/WalletRepositoryBuilder';
-import WalletBuilder from '../../helpers/WalletBuilder';
+import WalletRepositoryBuilder from '../../../helpers/WalletRepositoryBuilder';
+import WalletBuilder from '../../../helpers/WalletBuilder';
 
 describe('Wallet Repository', () => {
   describe('create()', () => {

@@ -1,6 +1,6 @@
 import { NOT_FOUND } from 'http-status';
 import { inject, Lifecycle, registry, scoped } from 'tsyringe';
-import { WalletWithId } from '../entities/interfaces/IWallet';
+import { WalletPublicInfo } from '../entities/interfaces/IWallet';
 
 import { IWalletRepository } from '../repositories/interfaces/IWalletRepository';
 import { IWalletService } from './interfaces/IWalletService';
@@ -18,21 +18,28 @@ export default class WalletService implements IWalletService {
     return createdWallet.id;
   }
 
-  async findByCredential(credentialId: string): Promise<WalletWithId[]> {
+  async findByCredential(credentialId: string): Promise<WalletPublicInfo[]> {
     const wallets = await this._repository.retrieveBy({ credentialId });
 
     if (!wallets.length) {
       throw new ResponseError(NOT_FOUND, WALLET_ERRORS.WALLET_NOT_FOUND.MESSAGE, WALLET_ERRORS.WALLET_NOT_FOUND.CODE);
     }
-    return wallets;
+    return wallets.map((wallet) => ({
+      enabled: wallet.enabled,
+      name: wallet.name,
+    }));
   }
 
-  async findByNameAndCredential(name: string, credentialId: string): Promise<WalletWithId> {
+  async findByNameAndCredential(name: string, credentialId: string): Promise<WalletPublicInfo> {
     const wallet = await this._repository.retrieveBy({ name, credentialId });
 
     if (!wallet.length) {
       throw new ResponseError(NOT_FOUND, WALLET_ERRORS.WALLET_NOT_FOUND.MESSAGE, WALLET_ERRORS.WALLET_NOT_FOUND.CODE);
     }
-    return wallet[0];
+
+    return {
+      enabled: wallet[0].enabled,
+      name: wallet[0].name,
+    };
   }
 }

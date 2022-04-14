@@ -55,6 +55,12 @@ describe('POST /wallets', () => {
 
         doc
           .path('/wallets')
+          .addParameters({
+            in: 'header',
+            name: 'x-credential-id',
+            example: headers['x-credential-id'],
+            allowEmptyValue: false,
+          })
           .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
           .fromSuperAgentResponse(res, 'success');
 
@@ -79,6 +85,12 @@ describe('POST /wallets', () => {
 
         doc
           .path('/wallets')
+          .addParameters({
+            in: 'header',
+            name: 'x-credential-id',
+            example: headers['x-credential-id'],
+            allowEmptyValue: false,
+          })
           .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
           .fromSuperAgentResponse(res, 'invalid body');
 
@@ -130,6 +142,12 @@ describe('POST /wallets', () => {
 
         doc
           .path('/wallets')
+          .addParameters({
+            in: 'header',
+            name: 'x-credential-id',
+            example: headers['x-credential-id'],
+            allowEmptyValue: false,
+          })
           .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
           .fromSuperAgentResponse(res, 'internal error');
 

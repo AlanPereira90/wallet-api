@@ -1,5 +1,5 @@
 import faker from '@faker-js/faker';
-import { WalletData } from '../../../src/domain/wallet/entities/interfaces/IWallet';
+import { WalletData } from '../../src/domain/wallet/entities/interfaces/IWallet';
 
 export default class WalletBuilder {
   public static build(fields: Partial<WalletData> = {}): WalletData {

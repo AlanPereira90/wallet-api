@@ -40,11 +40,7 @@ export default class CreateWalletController implements IController {
     res.status(CREATED).json({ id });
   }
 
-  public async requestValidator(
-    req: CustomRequest<CreateWalletRequest>,
-    res: CustomResponseError,
-    next: CustomNextFunction,
-  ) {
+  public requestValidator(req: CustomRequest<CreateWalletRequest>, res: CustomResponseError, next: CustomNextFunction) {
     const schema = Joi.object({
       name: Joi.string().required(),
     });

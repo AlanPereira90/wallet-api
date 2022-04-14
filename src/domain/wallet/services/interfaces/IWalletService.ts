@@ -1,7 +1,7 @@
-import { WalletWithId } from '../../entities/interfaces/IWallet';
+import { WalletPublicInfo } from '../../entities/interfaces/IWallet';
 
 export interface IWalletService {
   create(name: string, credentialId: string): Promise<number>;
-  findByCredential(credentialId: string): Promise<WalletWithId[]>;
-  findByNameAndCredential(name: string, credentialId: string): Promise<WalletWithId>;
+  findByCredential(credentialId: string): Promise<WalletPublicInfo[]>;
+  findByNameAndCredential(name: string, credentialId: string): Promise<WalletPublicInfo>;
 }

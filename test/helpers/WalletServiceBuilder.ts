@@ -1,8 +1,8 @@
 import { stub } from 'sinon';
 
-import WalletService from '../../../src/domain/wallet/services/WalletService';
-import { IWalletRepository } from '../../../src/domain/wallet/repositories/interfaces/IWalletRepository';
-import { IWalletService } from '../../../src/domain/wallet/services/interfaces/IWalletService';
+import WalletService from '../../src/domain/wallet/services/WalletService';
+import { IWalletRepository } from '../../src/domain/wallet/repositories/interfaces/IWalletRepository';
+import { IWalletService } from '../../src/domain/wallet/services/interfaces/IWalletService';
 
 export default class WalletServiceBuilder {
   public static build(repository: Partial<IWalletRepository> = {}): IWalletService {
