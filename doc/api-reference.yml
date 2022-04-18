@@ -96,11 +96,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.488ms
+              example: 3.349ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -111,48 +111,76 @@ paths:
     parameters:
       - in: header
         name: x-credential-id
-        example: 7745df2c-dbf6-4645-a28b-7b0a50416a3c
+        example: c796fe63-6fd2-400e-8a93-1bb513385ef0
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 43d36a6c-da08-4204-a675-8c0ab9c81629
+        example: eef86b0f-e715-4032-8171-03c9d0db9ce3
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 21022b6c-6fdc-4090-bbac-b4300c0ab0a2
+        example: 0439d455-5e10-42c7-91f9-0959e02e8b50
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 637c24c7-54e9-42a1-b59e-e7f1e56da22c
+        example: 47450415-eb6a-4b80-ba7c-a9adffc642bf
         allowEmptyValue: false
       - in: query
         name: name
-        example: sit
+        example: explicabo
         allowEmptyValue: true
       - in: header
         name: x-credential-id
-        example: 10fcfca2-fe3f-4fb3-82b8-8c3163bbed63
+        example: ff4aefe8-9df8-447c-bdd0-7c8ceeac7c88
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 2cb29fa5-88f4-4daa-a6be-1186b77f9e07
+        example: 1d52078f-5a3b-4ee0-898b-23107d9ce6df
         allowEmptyValue: false
       - in: query
         name: name
-        example: id
+        example: voluptatem
         allowEmptyValue: true
       - in: header
         name: x-credential-id
-        example: a69acd1a-3868-41d9-9825-95a4b30e0d8d
+        example: 60d678b3-a87a-46c5-8b81-477edaf4bde6
         allowEmptyValue: false
       - in: query
         name: name
-        example: molestiae
+        example: cupiditate
         allowEmptyValue: true
       - in: query
         name: name
-        example: sit
+        example: nihil
         allowEmptyValue: true
+      - in: path
+        name: id
+        example: 78967
+        allowEmptyValue: false
+      - in: header
+        name: x-credential-id
+        example: 6615b625-6f3e-4bfe-8310-a58e687543f7
+        allowEmptyValue: false
+      - in: path
+        name: id
+        example: 74012
+        allowEmptyValue: false
+      - in: header
+        name: x-credential-id
+        example: b379a831-49c2-4bd3-a248-8f42aaede55e
+        allowEmptyValue: false
+      - in: path
+        name: id
+        example: 28477
+        allowEmptyValue: false
+      - in: header
+        name: x-credential-id
+        example: 652abdf7-f9c0-4c76-bc2b-6bba6ac86e09
+        allowEmptyValue: false
+      - in: path
+        name: id
+        example: 76539
+        allowEmptyValue: false
     post:
       responses:
         "201":
@@ -164,7 +192,7 @@ paths:
                 properties:
                   id:
                     type: number
-                    example: 78580
+                    example: 34281
           headers:
             content-security-policy:
               schema:
@@ -241,15 +269,15 @@ paths:
             etag:
               schema:
                 type: string
-              example: W/"c-WatyT776jys8RbYRTlkuEocRpOk"
+              example: W/"c-YzFAB8AzttSDGs/+RzOyueJtYBU"
             x-response-time:
               schema:
                 type: string
-              example: 1.026ms
+              example: 12.141ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -344,11 +372,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.473ms
+              example: 0.531ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -362,8 +390,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Recusandae unde voluptatibus unde in voluptatem molestiae repudiandae
-                      et.
+                    example: Perspiciatis non quae.
           headers:
             content-security-policy:
               schema:
@@ -436,19 +463,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "87"
+              example: "36"
             etag:
               schema:
                 type: string
-              example: W/"57-1rWQKxqzxg+D1NFcK+szyZPMO5k"
+              example: W/"24-uMUJ5efycH9SHfr4kO6u21YnlKA"
             x-response-time:
               schema:
                 type: string
-              example: 1.118ms
+              example: 1.512ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -463,7 +490,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Frances
+                  example: Gwendolyn
     get:
       responses:
         "200":
@@ -478,10 +505,10 @@ paths:
                     items:
                       type: object
                     example:
-                      - id: b0b74977-0471-4083-99a0-af3c3ed0544f
-                        credentialId: 10fcfca2-fe3f-4fb3-82b8-8c3163bbed63
+                      - id: 46518570-7744-46e4-8d88-7bc0873a8f6f
+                        credentialId: ff4aefe8-9df8-447c-bdd0-7c8ceeac7c88
                         enabled: true
-                        name: Clement
+                        name: Maybelle
           headers:
             content-security-policy:
               schema:
@@ -554,19 +581,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "145"
+              example: "146"
             etag:
               schema:
                 type: string
-              example: W/"91-Z1GqutG3XIBtsCfrjHO0AS/vHcA"
+              example: W/"92-ceF83C0wBpH0e7wsbwPj8KbUT4w"
             x-response-time:
               schema:
                 type: string
-              example: 0.649ms
+              example: 1.636ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -661,11 +688,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.210ms
+              example: 0.358ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
@@ -763,17 +790,319 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.543ms
+              example: 1.885ms
             date:
               schema:
                 type: string
-              example: Thu, 14 Apr 2022 20:41:50 GMT
+              example: Mon, 18 Apr 2022 15:55:49 GMT
             connection:
               schema:
                 type: string
               example: close
       tags:
         - Wallets
+    put:
+      responses:
+        "200":
+          description: success
+          content:
+            "*/*":
+              schema:
+                type: object
+                properties: {}
+          headers:
+            content-security-policy:
+              schema:
+                type: string
+              example: "default-src 'self';base-uri 'self';block-all-mixed-content;font-src
+                'self' https: data:;form-action 'self';frame-ancestors
+                'self';img-src 'self' data:;object-src 'none';script-src
+                'self';script-src-attr 'none';style-src 'self' https:
+                'unsafe-inline';upgrade-insecure-requests"
+            cross-origin-embedder-policy:
+              schema:
+                type: string
+              example: require-corp
+            cross-origin-opener-policy:
+              schema:
+                type: string
+              example: same-origin
+            cross-origin-resource-policy:
+              schema:
+                type: string
+              example: same-origin
+            x-dns-prefetch-control:
+              schema:
+                type: string
+              example: off
+            expect-ct:
+              schema:
+                type: string
+              example: max-age=0
+            x-frame-options:
+              schema:
+                type: string
+              example: SAMEORIGIN
+            strict-transport-security:
+              schema:
+                type: string
+              example: max-age=15552000; includeSubDomains
+            x-download-options:
+              schema:
+                type: string
+              example: noopen
+            x-content-type-options:
+              schema:
+                type: string
+              example: nosniff
+            origin-agent-cluster:
+              schema:
+                type: string
+              example: ?1
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+              example: none
+            referrer-policy:
+              schema:
+                type: string
+              example: no-referrer
+            x-xss-protection:
+              schema:
+                type: string
+              example: "0"
+            vary:
+              schema:
+                type: string
+              example: Origin
+            x-response-time:
+              schema:
+                type: string
+              example: 4.220ms
+            date:
+              schema:
+                type: string
+              example: Mon, 18 Apr 2022 15:55:49 GMT
+            connection:
+              schema:
+                type: string
+              example: close
+            content-length:
+              schema:
+                type: string
+              example: "0"
+        "400":
+          description: invalid headers
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Missing x-credential-id header
+          headers:
+            content-security-policy:
+              schema:
+                type: string
+              example: "default-src 'self';base-uri 'self';block-all-mixed-content;font-src
+                'self' https: data:;form-action 'self';frame-ancestors
+                'self';img-src 'self' data:;object-src 'none';script-src
+                'self';script-src-attr 'none';style-src 'self' https:
+                'unsafe-inline';upgrade-insecure-requests"
+            cross-origin-embedder-policy:
+              schema:
+                type: string
+              example: require-corp
+            cross-origin-opener-policy:
+              schema:
+                type: string
+              example: same-origin
+            cross-origin-resource-policy:
+              schema:
+                type: string
+              example: same-origin
+            x-dns-prefetch-control:
+              schema:
+                type: string
+              example: off
+            expect-ct:
+              schema:
+                type: string
+              example: max-age=0
+            x-frame-options:
+              schema:
+                type: string
+              example: SAMEORIGIN
+            strict-transport-security:
+              schema:
+                type: string
+              example: max-age=15552000; includeSubDomains
+            x-download-options:
+              schema:
+                type: string
+              example: noopen
+            x-content-type-options:
+              schema:
+                type: string
+              example: nosniff
+            origin-agent-cluster:
+              schema:
+                type: string
+              example: ?1
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+              example: none
+            referrer-policy:
+              schema:
+                type: string
+              example: no-referrer
+            x-xss-protection:
+              schema:
+                type: string
+              example: "0"
+            vary:
+              schema:
+                type: string
+              example: Origin
+            content-type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            content-length:
+              schema:
+                type: string
+              example: "44"
+            etag:
+              schema:
+                type: string
+              example: W/"2c-e6XhgGuaKdfKWUScDV0tXRE2iAI"
+            x-response-time:
+              schema:
+                type: string
+              example: 0.556ms
+            date:
+              schema:
+                type: string
+              example: Mon, 18 Apr 2022 15:55:49 GMT
+            connection:
+              schema:
+                type: string
+              example: close
+        "404":
+          description: wallet not found
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Wallet not found
+                  code:
+                    type: string
+                    example: WL_0001
+          headers:
+            content-security-policy:
+              schema:
+                type: string
+              example: "default-src 'self';base-uri 'self';block-all-mixed-content;font-src
+                'self' https: data:;form-action 'self';frame-ancestors
+                'self';img-src 'self' data:;object-src 'none';script-src
+                'self';script-src-attr 'none';style-src 'self' https:
+                'unsafe-inline';upgrade-insecure-requests"
+            cross-origin-embedder-policy:
+              schema:
+                type: string
+              example: require-corp
+            cross-origin-opener-policy:
+              schema:
+                type: string
+              example: same-origin
+            cross-origin-resource-policy:
+              schema:
+                type: string
+              example: same-origin
+            x-dns-prefetch-control:
+              schema:
+                type: string
+              example: off
+            expect-ct:
+              schema:
+                type: string
+              example: max-age=0
+            x-frame-options:
+              schema:
+                type: string
+              example: SAMEORIGIN
+            strict-transport-security:
+              schema:
+                type: string
+              example: max-age=15552000; includeSubDomains
+            x-download-options:
+              schema:
+                type: string
+              example: noopen
+            x-content-type-options:
+              schema:
+                type: string
+              example: nosniff
+            origin-agent-cluster:
+              schema:
+                type: string
+              example: ?1
+            x-permitted-cross-domain-policies:
+              schema:
+                type: string
+              example: none
+            referrer-policy:
+              schema:
+                type: string
+              example: no-referrer
+            x-xss-protection:
+              schema:
+                type: string
+              example: "0"
+            vary:
+              schema:
+                type: string
+              example: Origin
+            content-type:
+              schema:
+                type: string
+              example: application/json; charset=utf-8
+            content-length:
+              schema:
+                type: string
+              example: "47"
+            etag:
+              schema:
+                type: string
+              example: W/"2f-T2L1qc1ibL1PyVYTCkxXoiMSshg"
+            x-response-time:
+              schema:
+                type: string
+              example: 1.421ms
+            date:
+              schema:
+                type: string
+              example: Mon, 18 Apr 2022 15:55:49 GMT
+            connection:
+              schema:
+                type: string
+              example: close
+      tags:
+        - Wallets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Wilford
 servers:
   - url: http://localhost:7000
     description: Wallet API Server

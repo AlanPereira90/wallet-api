@@ -34,7 +34,13 @@ export default class WalletRepository implements IWalletRepository {
   }
 
   async updateBy(filter: Partial<WalletWithId>, data: Partial<WalletData>): Promise<WalletWithId> {
-    const result = await this._dao.update(filter, data);
-    return result.raw;
+    try {
+      const result = await this._dao.update(filter, data);
+      return result.raw;
+    } catch (error: any) {
+      console.error(`[ERROR]: ${error.message}`);
+
+      throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
+    }
   }
 }
