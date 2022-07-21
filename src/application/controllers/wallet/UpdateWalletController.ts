@@ -24,7 +24,7 @@ interface UpdateWalletPathParams {
 @registry([{ token: 'Controller', useClass: UpdateWalletController }])
 export default class UpdateWalletController implements IController {
   verb: HttpVerb = 'put';
-  path: string = '/wallets/:id';
+  path = '/wallets/:id';
 
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 

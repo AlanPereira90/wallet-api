@@ -1,5 +1,3 @@
-import '../infra/PostgresConnection';
-
 import '../wallet/daos/WalletDao';
 import '../wallet/daos/DescriptorDao';
 import '../wallet/daos/MovimentDao';

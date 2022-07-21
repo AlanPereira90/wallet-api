@@ -25,7 +25,7 @@ interface RetrieveWalletResponse {
 @registry([{ token: 'Controller', useClass: RetrieveWalletController }])
 export default class RetrieveWalletController implements IController {
   verb: HttpVerb = 'get';
-  path: string = '/wallets';
+  path = '/wallets';
 
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 

@@ -13,8 +13,8 @@
     "format": "prettier --write .",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "migration:create": "cd migrations && typeorm migration:create ",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/domain/infra/PostgresConnection.ts",
-    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/domain/infra/PostgresConnection.ts"
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/infra/database/PostgresConnection.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/infra/database/PostgresConnection.ts"
   },
   "repository": {
     "type": "git",
