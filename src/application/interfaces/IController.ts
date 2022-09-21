@@ -1,15 +1,13 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { HttpVerb } from '../../@types/http-verb';
 
-export type ParametersField = 'query' | 'params' | 'body';
-
-export type CustomRequest<R, T extends ParametersField = 'body'> = T extends 'query'
-  ? Request<unknown, unknown, unknown, R>
-  : T extends 'body'
-  ? Request<unknown, unknown, R>
-  : T extends 'params'
-  ? Request<R>
-  : never;
+export type CustomRequest<
+  T extends Partial<{
+    params: T['params'];
+    body: T['body'];
+    query: T['query'];
+  }> = Record<string, unknown>,
+> = Request<T['params'], any, T['body'], T['query']>;
 
 export type CustomResponse<T> = Response<T>;
 

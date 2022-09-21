@@ -28,7 +28,7 @@ export default class UpdateWalletController implements IController {
 
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 
-  public async handler(req: CustomRequest<UpdateWalletRequest>, res: CustomResponse<void>): Promise<void> {
+  public async handler(req: CustomRequest<{ body: UpdateWalletRequest }>, res: CustomResponse<void>): Promise<void> {
     const { ...fields } = req.body;
     const { id } = req.params as UpdateWalletPathParams;
     const credentialId = req.headers['x-credential-id'] as string;
@@ -38,7 +38,11 @@ export default class UpdateWalletController implements IController {
     res.status(OK).end();
   }
 
-  public requestValidator(req: CustomRequest<UpdateWalletRequest>, res: CustomResponseError, next: CustomNextFunction) {
+  public requestValidator(
+    req: CustomRequest<{ body: UpdateWalletRequest }>,
+    res: CustomResponseError,
+    next: CustomNextFunction,
+  ) {
     const schema = Joi.object({
       name: Joi.string().optional(),
     });

@@ -29,7 +29,7 @@ export default class CreateWalletController implements IController {
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 
   public async handler(
-    req: CustomRequest<CreateWalletRequest>,
+    req: CustomRequest<{ body: CreateWalletRequest }>,
     res: CustomResponse<CreateWalletResponse>,
   ): Promise<void> {
     const { name } = req.body;
@@ -40,7 +40,11 @@ export default class CreateWalletController implements IController {
     res.status(CREATED).json({ id });
   }
 
-  public requestValidator(req: CustomRequest<CreateWalletRequest>, res: CustomResponseError, next: CustomNextFunction) {
+  public requestValidator(
+    req: CustomRequest<{ body: CreateWalletRequest }>,
+    res: CustomResponseError,
+    next: CustomNextFunction,
+  ) {
     const schema = Joi.object({
       name: Joi.string().required(),
     });

@@ -30,7 +30,7 @@ export default class RetrieveWalletController implements IController {
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 
   public async handler(
-    req: CustomRequest<RetrieveWalletRequest, 'query'>,
+    req: CustomRequest<{ query: RetrieveWalletRequest }>,
     res: CustomResponse<RetrieveWalletResponse>,
   ): Promise<void> {
     const { name } = req.query;
@@ -48,7 +48,7 @@ export default class RetrieveWalletController implements IController {
   }
 
   public requestValidator(
-    req: CustomRequest<RetrieveWalletRequest, 'query'>,
+    req: CustomRequest<{ query: RetrieveWalletRequest }>,
     res: CustomResponseError,
     next: CustomNextFunction,
   ) {

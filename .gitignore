@@ -161,6 +161,9 @@ dist
 .vscode/*
 *.code-workspace
 
+### jetbrains IDE ###
+.idea
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db

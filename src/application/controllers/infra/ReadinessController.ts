@@ -14,7 +14,7 @@ export default class ReadinessController implements IController {
   public verb: HttpVerb = 'get';
   public path = '/status';
 
-  public handler(_req: CustomRequest<void>, res: CustomResponse<ReadinessResponse>): void {
+  public handler(_req: CustomRequest, res: CustomResponse<ReadinessResponse>) {
     res.status(OK).send({
       status: true,
     });
