@@ -96,11 +96,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 3.349ms
+              example: 0.416ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -111,75 +111,75 @@ paths:
     parameters:
       - in: header
         name: x-credential-id
-        example: c796fe63-6fd2-400e-8a93-1bb513385ef0
+        example: 1ca8a4c8-12fd-4fd5-ad58-8bd841b1bd57
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: eef86b0f-e715-4032-8171-03c9d0db9ce3
+        example: bfc72fa4-237d-4327-828e-219d3e63f2de
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 0439d455-5e10-42c7-91f9-0959e02e8b50
+        example: 0a49191d-5e09-42c7-93f5-5ebf9633c34b
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 47450415-eb6a-4b80-ba7c-a9adffc642bf
+        example: dbeb533a-c428-41f9-af62-9fe52fd77eaf
         allowEmptyValue: false
       - in: query
         name: name
-        example: explicabo
+        example: aperiam
         allowEmptyValue: true
       - in: header
         name: x-credential-id
-        example: ff4aefe8-9df8-447c-bdd0-7c8ceeac7c88
+        example: 79b0295f-7c43-4d96-94f4-16f5c36fd2ee
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 1d52078f-5a3b-4ee0-898b-23107d9ce6df
+        example: 14219c17-4598-48a3-8ac0-569630cd60b2
         allowEmptyValue: false
       - in: query
         name: name
-        example: voluptatem
+        example: ullam
         allowEmptyValue: true
       - in: header
         name: x-credential-id
-        example: 60d678b3-a87a-46c5-8b81-477edaf4bde6
+        example: e49e7302-88fb-49da-98d3-40e7822fcdb9
         allowEmptyValue: false
       - in: query
         name: name
-        example: cupiditate
+        example: similique
         allowEmptyValue: true
       - in: query
         name: name
-        example: nihil
+        example: ullam
         allowEmptyValue: true
       - in: path
         name: id
-        example: 78967
+        example: 31025
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 6615b625-6f3e-4bfe-8310-a58e687543f7
+        example: b177e847-14ad-48d5-acee-3af4259b8720
         allowEmptyValue: false
       - in: path
         name: id
-        example: 74012
+        example: 62027
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: b379a831-49c2-4bd3-a248-8f42aaede55e
+        example: 42fdeb25-c38b-4fcf-89c1-7bdc365ad486
         allowEmptyValue: false
       - in: path
         name: id
-        example: 28477
+        example: 28272
         allowEmptyValue: false
       - in: header
         name: x-credential-id
-        example: 652abdf7-f9c0-4c76-bc2b-6bba6ac86e09
+        example: ce1ba1c3-515d-4796-889d-d02438c5de97
         allowEmptyValue: false
       - in: path
         name: id
-        example: 76539
+        example: 41127
         allowEmptyValue: false
     post:
       responses:
@@ -192,7 +192,7 @@ paths:
                 properties:
                   id:
                     type: number
-                    example: 34281
+                    example: 50690
           headers:
             content-security-policy:
               schema:
@@ -269,15 +269,15 @@ paths:
             etag:
               schema:
                 type: string
-              example: W/"c-YzFAB8AzttSDGs/+RzOyueJtYBU"
+              example: W/"c-n20B76z8Ja54zWJeUCEeHWxQaAg"
             x-response-time:
               schema:
                 type: string
-              example: 12.141ms
+              example: 1.114ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -372,11 +372,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.531ms
+              example: 0.537ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -390,7 +390,7 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: Perspiciatis non quae.
+                    example: In iure atque ut quia ut unde delectus aspernatur voluptas.
           headers:
             content-security-policy:
               schema:
@@ -463,19 +463,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "36"
+              example: "73"
             etag:
               schema:
                 type: string
-              example: W/"24-uMUJ5efycH9SHfr4kO6u21YnlKA"
+              example: W/"49-qQWEsM5Pc0T+yVR7BZ/EOzKJV+s"
             x-response-time:
               schema:
                 type: string
-              example: 1.512ms
+              example: 1.235ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -490,7 +490,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Gwendolyn
+                  example: Keara
     get:
       responses:
         "200":
@@ -505,10 +505,10 @@ paths:
                     items:
                       type: object
                     example:
-                      - id: 46518570-7744-46e4-8d88-7bc0873a8f6f
-                        credentialId: ff4aefe8-9df8-447c-bdd0-7c8ceeac7c88
+                      - id: e80c1241-3e78-4cb9-ad70-f612107279cd
+                        credentialId: 79b0295f-7c43-4d96-94f4-16f5c36fd2ee
                         enabled: true
-                        name: Maybelle
+                        name: Name
           headers:
             content-security-policy:
               schema:
@@ -581,19 +581,19 @@ paths:
             content-length:
               schema:
                 type: string
-              example: "146"
+              example: "142"
             etag:
               schema:
                 type: string
-              example: W/"92-ceF83C0wBpH0e7wsbwPj8KbUT4w"
+              example: W/"8e-PY6E0wtNKYOYheEKpLC21SbPczg"
             x-response-time:
               schema:
                 type: string
-              example: 1.636ms
+              example: 0.946ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -688,11 +688,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.358ms
+              example: 0.246ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -790,11 +790,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 1.885ms
+              example: 1.152ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -878,11 +878,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 4.220ms
+              example: 1.382ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -981,11 +981,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 0.556ms
+              example: 0.495ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -1083,11 +1083,11 @@ paths:
             x-response-time:
               schema:
                 type: string
-              example: 1.421ms
+              example: 1.080ms
             date:
               schema:
                 type: string
-              example: Mon, 18 Apr 2022 15:55:49 GMT
+              example: Mon, 26 Sep 2022 15:05:14 GMT
             connection:
               schema:
                 type: string
@@ -1102,7 +1102,7 @@ paths:
               properties:
                 name:
                   type: string
-                  example: Wilford
+                  example: Julian
 servers:
   - url: http://localhost:7000
     description: Wallet API Server

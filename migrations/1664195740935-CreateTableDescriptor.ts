@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-const tableName = 'wallet';
-export class CreateTableWallet1649859805584 implements MigrationInterface {
+const tableName = 'descriptor';
+export class CreateTableDescriptor1664195740935 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -25,8 +25,16 @@ export class CreateTableWallet1649859805584 implements MigrationInterface {
             isUnique: false,
           },
           {
+            name: 'description',
+            type: 'varchar',
+            isPrimary: false,
+            isGenerated: false,
+            isNullable: true,
+            isUnique: false,
+          },
+          {
             name: 'enabled',
-            type: 'boolean',
+            type: 'bool',
             isPrimary: false,
             isGenerated: false,
             isNullable: false,
@@ -34,8 +42,8 @@ export class CreateTableWallet1649859805584 implements MigrationInterface {
             default: true,
           },
           {
-            name: 'credential_id',
-            type: 'varchar',
+            name: 'wallet_id',
+            type: 'integer',
             isPrimary: false,
             isGenerated: false,
             isNullable: false,
@@ -61,8 +69,16 @@ export class CreateTableWallet1649859805584 implements MigrationInterface {
           },
         ],
         indices: [
-          { columnNames: ['id'], isUnique: true, name: 'wl_id_index' },
-          { columnNames: ['credential_id'], isUnique: false, name: 'wl_credential_index' },
+          { columnNames: ['id'], isUnique: true, name: 'desc_id_index' },
+          { columnNames: ['wallet_id'], isUnique: false, name: 'desc_wallet_index' },
+        ],
+        foreignKeys: [
+          {
+            columnNames: ['wallet_id'],
+            referencedTableName: 'wallet',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+          },
         ],
       }),
     );
