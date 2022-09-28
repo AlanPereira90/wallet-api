@@ -13,13 +13,16 @@ import {
 } from '../../interfaces/IController';
 import Joi from 'joi';
 
-interface RetrieveWalletRequest {
+type RetrieveWalletRequest = {
   name?: string;
-}
+};
 
-interface RetrieveWalletResponse {
-  wallets: WalletWithId[];
-}
+type RetrieveWalletResponse = {
+  wallets: Array<WalletWithId>;
+};
+
+type RouteRequest = CustomRequest<{ query: RetrieveWalletRequest }>;
+type RouteResponse = CustomResponse<RetrieveWalletResponse>;
 
 @scoped(Lifecycle.ResolutionScoped)
 @registry([{ token: 'Controller', useClass: RetrieveWalletController }])
@@ -29,10 +32,7 @@ export default class RetrieveWalletController implements IController {
 
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 
-  public async handler(
-    req: CustomRequest<{ query: RetrieveWalletRequest }>,
-    res: CustomResponse<RetrieveWalletResponse>,
-  ): Promise<void> {
+  public async handler(req: RouteRequest, res: RouteResponse): Promise<RouteResponse> {
     const { name } = req.query;
     const credentialId = req.headers['x-credential-id'] as string;
 
@@ -44,22 +44,18 @@ export default class RetrieveWalletController implements IController {
       wallets = await this._service.findByCredential(credentialId);
     }
 
-    res.status(OK).json({ wallets });
+    return res.status(OK).json({ wallets });
   }
 
-  public requestValidator(
-    req: CustomRequest<{ query: RetrieveWalletRequest }>,
-    res: CustomResponseError,
-    next: CustomNextFunction,
-  ) {
-    const schema = Joi.object({
+  public requestValidator(req: RouteRequest, res: CustomResponseError, next: CustomNextFunction) {
+    const schema = Joi.object<RetrieveWalletRequest>({
       name: Joi.string().optional(),
     });
 
     const { error } = schema.validate(req.query);
 
     if (error) {
-      res.status(BAD_REQUEST).json({ message: error?.message });
+      res.status(BAD_REQUEST).json({ message: error.message });
     } else {
       next();
     }

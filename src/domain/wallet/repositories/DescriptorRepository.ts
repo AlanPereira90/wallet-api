@@ -12,6 +12,7 @@ export default class DescriptorRepository implements IDescriptorRepository {
 
   async create(descriptor: DescriptorData): Promise<DescriptorWithId> {
     try {
+      console.log('--->', descriptor);
       const result = await this._dao.save(descriptor);
       return result;
     } catch (error: any) {

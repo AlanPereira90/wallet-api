@@ -12,13 +12,16 @@ import {
 import { HttpVerb } from '../../../@types/http-verb';
 import { IWalletService } from '../../../domain/wallet/services/interfaces/IWalletService';
 
-interface CreateWalletRequest {
+type CreateWalletRequest = {
   name: string;
-}
+};
 
-interface CreateWalletResponse {
+type CreateWalletResponse = {
   id: number;
-}
+};
+
+type RouteRequest = CustomRequest<{ body: CreateWalletRequest }>;
+type RouteResponse = CustomResponse<CreateWalletResponse>;
 
 @scoped(Lifecycle.ResolutionScoped)
 @registry([{ token: 'Controller', useClass: CreateWalletController }])
@@ -28,31 +31,24 @@ export default class CreateWalletController implements IController {
 
   constructor(@inject('WalletService') private readonly _service: IWalletService) {}
 
-  public async handler(
-    req: CustomRequest<{ body: CreateWalletRequest }>,
-    res: CustomResponse<CreateWalletResponse>,
-  ): Promise<void> {
+  public async handler(req: RouteRequest, res: RouteResponse): Promise<RouteResponse> {
     const { name } = req.body;
     const credentialId = req.headers['x-credential-id'] as string;
 
     const id = await this._service.create(name, credentialId);
 
-    res.status(CREATED).json({ id });
+    return res.status(CREATED).json({ id });
   }
 
-  public requestValidator(
-    req: CustomRequest<{ body: CreateWalletRequest }>,
-    res: CustomResponseError,
-    next: CustomNextFunction,
-  ) {
-    const schema = Joi.object({
+  public requestValidator(req: RouteRequest, res: CustomResponseError, next: CustomNextFunction) {
+    const schema = Joi.object<CreateWalletRequest>({
       name: Joi.string().required(),
     });
 
     const { error } = schema.validate(req.body);
 
     if (error) {
-      res.status(BAD_REQUEST).json({ message: error?.message });
+      res.status(BAD_REQUEST).json({ message: error.message });
     } else {
       next();
     }

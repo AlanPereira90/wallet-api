@@ -7,8 +7,8 @@ import { BAD_REQUEST, CREATED, INTERNAL_SERVER_ERROR } from 'http-status';
 import { restore, stub } from 'sinon';
 
 import { App } from '../../../src/application/setup/App';
-import { WalletWithId } from '../../../src/domain/wallet/entities/interfaces/IWallet';
 import { doc } from '../../documentation';
+import { DescriptorWithId } from '../../../src/domain/wallet/entities/interfaces/IDescriptor';
 
 let app: Express;
 before(function () {
@@ -27,22 +27,24 @@ afterEach(() => {
   restore();
 });
 
-describe('POST /wallets', () => {
+describe('POST /wallets/{id}/descriptors', () => {
   it('should return 201 CREATED', (done) => {
-    const body = { name: faker.name.firstName() };
+    const walletId = faker.datatype.number();
+    const body = { name: faker.lorem.word(), description: faker.lorem.sentence() };
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
 
-    const savedWallet: WalletWithId = {
+    const savedDescriptor: DescriptorWithId = {
+      walletId,
       id: faker.datatype.number(),
       name: body.name,
-      credentialId: headers['x-credential-id'],
+      description: body.description,
       enabled: true,
     };
 
-    const save = stub(Repository.prototype, 'save').resolves(savedWallet);
+    const save = stub(Repository.prototype, 'save').resolves(savedDescriptor);
 
     supertest(app)
-      .post('/wallets')
+      .post(`/wallets/${walletId}/descriptors`)
       .set('Content-type', 'application/json')
       .set(headers)
       .send(body)
@@ -50,18 +52,21 @@ describe('POST /wallets', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('id').to.be.equal(savedWallet.id);
-        expect(save).to.be.calledOnceWith({ enabled: true, name: body.name, credentialId: headers['x-credential-id'] });
+        expect(res.body).to.have.property('id').to.be.equal(savedDescriptor.id);
+        expect(save).to.be.calledOnceWith({ walletId, name: body.name, description: body.description, enabled: true });
 
         doc
-          .path('/wallets')
+          .path(`/wallets/${walletId}/descriptors`)
           .addParameters({
             in: 'header',
             name: 'x-credential-id',
             example: headers['x-credential-id'],
             allowEmptyValue: false,
           })
-          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .verb('post', {
+            requestBody: { content: body, mediaType: 'application/json' },
+            tags: ['Wallets', 'Descriptors'],
+          })
           .fromSuperAgentResponse(res, 'success');
 
         done();
@@ -69,11 +74,12 @@ describe('POST /wallets', () => {
   });
 
   it('should return 400 BAD_REQUEST given an invalid body', (done) => {
-    const body = { namem: faker.name.firstName() };
+    const walletId = faker.datatype.number();
+    const body = { description: faker.lorem.sentence() };
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
 
     supertest(app)
-      .post('/wallets')
+      .post(`/wallets/${walletId}/descriptors`)
       .set('Content-type', 'application/json')
       .set(headers)
       .send(body)
@@ -84,26 +90,64 @@ describe('POST /wallets', () => {
         expect(res.body).to.have.property('message').to.be.equal('"name" is required');
 
         doc
-          .path('/wallets')
+          .path(`/wallets/${walletId}/descriptors`)
           .addParameters({
             in: 'header',
             name: 'x-credential-id',
             example: headers['x-credential-id'],
             allowEmptyValue: false,
           })
-          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .verb('post', {
+            requestBody: { content: body, mediaType: 'application/json' },
+            tags: ['Wallets', 'Descriptors'],
+          })
           .fromSuperAgentResponse(res, 'invalid body');
 
         done();
       });
   });
 
+  it('should return 400 BAD_REQUEST given an invalid path', (done) => {
+    const walletId = faker.lorem.word();
+    const body = { name: faker.lorem.word(), description: faker.lorem.sentence() };
+    const headers = { ['x-credential-id']: faker.datatype.uuid() };
+
+    supertest(app)
+      .post(`/wallets/${walletId}/descriptors`)
+      .set('Content-type', 'application/json')
+      .set(headers)
+      .send(body)
+      .expect(BAD_REQUEST)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.property('message').to.be.equal('"wallet_id" must be a number');
+
+        doc
+          .path(`/wallets/${walletId}/descriptors`)
+          .addParameters({
+            in: 'header',
+            name: 'x-credential-id',
+            example: headers['x-credential-id'],
+            allowEmptyValue: false,
+          })
+          .verb('post', {
+            requestBody: { content: body, mediaType: 'application/json' },
+            tags: ['Wallets', 'Descriptors'],
+          })
+          .fromSuperAgentResponse(res, 'invalid path');
+
+        done();
+      });
+  });
+
   it('should return 400 BAD_REQUEST given a request without required headers', (done) => {
-    const body = { name: faker.name.firstName() };
+    const walletId = faker.datatype.number();
+    const body = { name: faker.lorem.word(), description: faker.lorem.sentence() };
     const headers = { [faker.lorem.word()]: faker.datatype.uuid() };
 
     supertest(app)
-      .post('/wallets')
+      .post(`/wallets/${walletId}/descriptors`)
       .set('Content-type', 'application/json')
       .set(headers)
       .send(body)
@@ -114,8 +158,11 @@ describe('POST /wallets', () => {
         expect(res.body).to.have.property('message').to.be.equal('Missing x-credential-id header');
 
         doc
-          .path('/wallets')
-          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .path(`/wallets/${walletId}/descriptors`)
+          .verb('post', {
+            requestBody: { content: body, mediaType: 'application/json' },
+            tags: ['Wallets', 'Descriptors'],
+          })
           .fromSuperAgentResponse(res, 'invalid headers');
 
         done();
@@ -123,13 +170,14 @@ describe('POST /wallets', () => {
   });
 
   it('should return 500 INTERNAL_SERVER_ERROR when database is down', (done) => {
-    const body = { name: faker.name.firstName() };
+    const walletId = faker.datatype.number();
+    const body = { name: faker.lorem.word(), description: faker.lorem.sentence() };
     const headers = { ['x-credential-id']: faker.datatype.uuid() };
     const message = faker.lorem.sentence();
     const save = stub(Repository.prototype, 'save').rejects(new Error(message));
 
     supertest(app)
-      .post('/wallets')
+      .post(`/wallets/${walletId}/descriptors`)
       .set('Content-type', 'application/json')
       .set(headers)
       .send(body)
@@ -138,17 +186,20 @@ describe('POST /wallets', () => {
         expect(err).to.be.null;
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('message').to.be.equal(message);
-        expect(save).to.be.calledOnceWith({ enabled: true, name: body.name, credentialId: headers['x-credential-id'] });
+        expect(save).to.be.calledOnceWith({ walletId, name: body.name, description: body.description, enabled: true });
 
         doc
-          .path('/wallets')
+          .path(`/wallets/${walletId}/descriptors`)
           .addParameters({
             in: 'header',
             name: 'x-credential-id',
             example: headers['x-credential-id'],
             allowEmptyValue: false,
           })
-          .verb('post', { requestBody: { content: body, mediaType: 'application/json' }, tags: ['Wallets'] })
+          .verb('post', {
+            requestBody: { content: body, mediaType: 'application/json' },
+            tags: ['Wallets', 'Descriptors'],
+          })
           .fromSuperAgentResponse(res, 'internal error');
 
         done();

@@ -15,7 +15,7 @@ export type CustomResponseError = CustomResponse<{ message: string }>;
 
 export type CustomNextFunction = NextFunction;
 
-export type CustomRequestHandler = RequestHandler;
+export type CustomRequestHandler = RequestHandler<any, any, any, any>;
 
 export interface IController {
   verb: HttpVerb;

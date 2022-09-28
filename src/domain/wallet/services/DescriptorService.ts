@@ -7,7 +7,7 @@ import { IDescriptorRepository } from '../repositories/interfaces/IDescriptorRep
 export default class DescriptorService implements IDescriptorService {
   constructor(@inject('DescriptorRepository') private readonly _repository: IDescriptorRepository) {}
 
-  async create(walletId: number, name: string, description: string): Promise<number> {
+  async create(walletId: number, name: string, description?: string): Promise<number> {
     const createdDescriptor = await this._repository.create({ walletId, name, description, enabled: true });
 
     return createdDescriptor.id;
