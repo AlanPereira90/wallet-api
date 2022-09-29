@@ -10,6 +10,7 @@ import { App } from '../../../src/application/setup/App';
 import { WALLET_ERRORS } from '../../../src/domain/common/utils/error';
 import { doc } from '../../documentation';
 import WalletBuilder from '../../helpers/WalletBuilder';
+import { logger } from '../../../src/infra/logger/logger';
 
 let app: Express;
 before(function () {
@@ -20,7 +21,7 @@ after(async () => {
   try {
     await doc.writeFile();
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 });
 

@@ -11,6 +11,7 @@ import errorHandler from '../middlewares/errorHandler';
 import routes from '../routes';
 import { CONFIG, PROD } from '../../domain/common/utils/environment';
 import requireCredentialId from '../middlewares/requiredCredentialId';
+import { logger } from '../../infra/logger/logger';
 
 export class App {
   app: express.Express;
@@ -36,10 +37,10 @@ export class App {
 
   listen(): void {
     this.app.listen(CONFIG.PORT, () => {
-      console.info(
+      logger.info(
         `[INFO]: Server is running. Listening on port ${CONFIG.PORT}\nDocumentation available on SERVER_URL:${CONFIG.PORT}/api-docs`,
       );
-      console.debug('Press CTRL+C to exit');
+      logger.debug('Press CTRL+C to exit');
     });
   }
 }

@@ -2,6 +2,7 @@ import { RequestHandler, Router } from 'express';
 import { container } from 'tsyringe';
 
 import { IController } from '../interfaces/IController';
+import { logger } from '../../infra/logger/logger';
 
 const router: Router = Router();
 
@@ -30,7 +31,7 @@ function getHandler(controller: IController): RequestHandler[] {
 }
 
 for (const controller of getControllers()) {
-  console.info(`[INFO]: Route ${controller.verb.toUpperCase()} ${controller.path} enabled`);
+  logger.info(`[INFO]: Route ${controller.verb.toUpperCase()} ${controller.path} enabled`);
   router[controller.verb](controller.path, getHandler(controller));
 }
 

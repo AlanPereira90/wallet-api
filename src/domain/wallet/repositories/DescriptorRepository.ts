@@ -4,6 +4,7 @@ import { inject, Lifecycle, registry, scoped } from 'tsyringe';
 import { IDescriptorDao } from '../daos/interfaces/IDescriptorDao';
 import ResponseError from '../../common/utils/ResponseError';
 import { INTERNAL_SERVER_ERROR } from 'http-status';
+import { logger } from '../../../infra/logger/logger';
 
 @scoped(Lifecycle.ResolutionScoped)
 @registry([{ token: 'DescriptorRepository', useClass: DescriptorRepository }])
@@ -15,7 +16,7 @@ export default class DescriptorRepository implements IDescriptorRepository {
       const result = await this._dao.save(descriptor);
       return result;
     } catch (error: any) {
-      console.error(`[ERROR]: ${error.message}`);
+      logger.error(`[ERROR]: ${error.message}`);
 
       throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
     }
@@ -26,7 +27,7 @@ export default class DescriptorRepository implements IDescriptorRepository {
       const result = await this._dao.findBy({ ...filter });
       return result;
     } catch (error: any) {
-      console.error(`[ERROR]: ${error.message}`);
+      logger.error(`[ERROR]: ${error.message}`);
 
       throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
     }

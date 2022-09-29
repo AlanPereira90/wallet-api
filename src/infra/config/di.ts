@@ -1,1 +1,1 @@
-import '../database/PostgresConnection';
+import '../database/postgresConnection';

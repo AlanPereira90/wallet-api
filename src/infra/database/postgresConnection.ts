@@ -2,8 +2,9 @@ import { container } from 'tsyringe';
 import { DataSource } from 'typeorm';
 
 import { ENV, POSTGRES } from '../../domain/common/utils/environment';
+import { logger } from '../logger/logger';
 
-export const connection = new DataSource({
+const connection = new DataSource({
   type: 'postgres',
   host: POSTGRES.HOST,
   port: POSTGRES.PORT,
@@ -18,7 +19,7 @@ export const connection = new DataSource({
 export async function connectDB() {
   const db = await connection.initialize();
 
-  console.info('[INFO]: PostgreSQL connection stablished');
+  logger.info('[INFO]: PostgreSQL connection stablished');
 
   if (ENV !== 'test') {
     container.registerInstance('PostgresConnection', db);

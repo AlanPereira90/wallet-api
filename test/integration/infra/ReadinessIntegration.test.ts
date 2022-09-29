@@ -5,6 +5,7 @@ import { expect } from 'chai';
 
 import { App } from '../../../src/application/setup/App';
 import { doc } from '../../documentation';
+import { logger } from '../../../src/infra/logger/logger';
 
 let app: Express;
 before(function () {
@@ -15,7 +16,7 @@ after(async () => {
   try {
     await doc.writeFile();
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 });
 

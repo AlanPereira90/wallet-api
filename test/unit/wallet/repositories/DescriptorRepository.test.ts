@@ -33,7 +33,7 @@ describe('Descriptor Repository', () => {
     });
   });
 
-  describe.only('retrieveBy()', () => {
+  describe('retrieveBy()', () => {
     it('should retrieve an array of descriptors successfully given a valid filter', async () => {
       const filter = {
         name: faker.lorem.word(),
