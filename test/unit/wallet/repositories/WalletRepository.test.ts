@@ -35,7 +35,7 @@ describe('Wallet Repository', () => {
   });
 
   describe('retrieveBy()', () => {
-    it('should find wallets given a filter successfully', async () => {
+    it('should find wallets given a filter successfully given a valid filter', async () => {
       const filter = {
         name: faker.name.firstName(),
       };
@@ -48,6 +48,18 @@ describe('Wallet Repository', () => {
 
       expect(result).to.be.deep.equal(wallets);
       expect(findBy).to.be.calledOnceWith(filter);
+    });
+
+    it('should find wallets given a filter successfully given an empty filter', async () => {
+      const wallets = [WalletBuilder.build(), WalletBuilder.build()];
+
+      const findBy = stub().resolves(wallets);
+      const instance = WalletRepositoryBuilder.build({ findBy });
+
+      const result = await instance.retrieveBy({});
+
+      expect(result).to.be.deep.equal(wallets);
+      expect(findBy).to.be.calledOnceWith({});
     });
 
     it('should return an empty array when search does reach out nothing', async () => {

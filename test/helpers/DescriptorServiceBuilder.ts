@@ -6,7 +6,8 @@ import DescriptorService from '../../src/domain/wallet/services/DescriptorServic
 export default class DescriptorServiceBuilder {
   public static build(repository: Partial<IDescriptorRepository> = {}): IDescriptorService {
     const create = stub();
+    const retrieveBy = stub();
 
-    return new DescriptorService({ create, ...repository });
+    return new DescriptorService({ create, retrieveBy, ...repository });
   }
 }

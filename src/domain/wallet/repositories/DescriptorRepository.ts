@@ -12,8 +12,18 @@ export default class DescriptorRepository implements IDescriptorRepository {
 
   async create(descriptor: DescriptorData): Promise<DescriptorWithId> {
     try {
-      console.log('--->', descriptor);
       const result = await this._dao.save(descriptor);
+      return result;
+    } catch (error: any) {
+      console.error(`[ERROR]: ${error.message}`);
+
+      throw new ResponseError(INTERNAL_SERVER_ERROR, error.message);
+    }
+  }
+
+  async retrieveBy(filter: Partial<DescriptorWithId>): Promise<DescriptorWithId[]> {
+    try {
+      const result = await this._dao.findBy({ ...filter });
       return result;
     } catch (error: any) {
       console.error(`[ERROR]: ${error.message}`);
